@@ -1,12 +1,15 @@
-package de.felixperko.worldgenconfig.Generation.GenerationPath;
+package de.felixperko.worldgenconfig.Generation.GenerationPath.Nodes;
 
-public abstract class CombineNode implements GenerationNode {
+import de.felixperko.worldgenconfig.Generation.GenerationPath.GenerationParameterSupply;
+import de.felixperko.worldgenconfig.Generation.GenerationPath.GenerationPathIncompleteException;
+
+public abstract class CombineNode implements Node {
 	
-	GenerationNode[] inputNodes;
+	Node[] inputNodes;
 	double[] inputValues;
 	
 	public CombineNode(int inputs) {
-		inputNodes = new GenerationNode[inputs];
+		inputNodes = new Node[inputs];
 		inputValues = new double[inputs];
 	}
 	
@@ -26,7 +29,7 @@ public abstract class CombineNode implements GenerationNode {
 	}
 
 	@Override
-	public void setInput(int index, GenerationNode node) {
+	public void setInput(int index, Node node) {
 		inputNodes[index] = node;
 	}
 	

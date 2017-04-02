@@ -1,17 +1,23 @@
-package de.felixperko.worldgenconfig.Generation.Noise;
+package de.felixperko.worldgenconfig.Generation.GenerationPath.Nodes;
 
-import java.util.Collection;
 import java.util.Random;
 
-import de.felixperko.worldgenconfig.Generation.GenerationPath.GenerationNode;
+import de.felixperko.worldgenconfig.Generation.GenerationPath.DoubleNodeSetting;
 import de.felixperko.worldgenconfig.Generation.GenerationPath.GenerationParameterSupply;
+import de.felixperko.worldgenconfig.Generation.GenerationPath.IntNodeSetting;
+import de.felixperko.worldgenconfig.Generation.Noise.OpenSimplexNoise;
 
-public class NoiseGenerator implements GenerationNode{
+public class NoiseGenerator implements Node{
 	
-	double frequency = 1;
-	double persistance = 0.5;
-	double lacunarity = 2;
-	int octaves = 1;
+	@DoubleNodeSetting (lowest = 0.0)
+	public double frequency = 1;
+	@DoubleNodeSetting (lowest = 0.0)
+	public double persistance = 0.5;
+	@DoubleNodeSetting (lowest = 0.0)
+	public double lacunarity = 2;
+	@IntNodeSetting (lowest = 1)
+	public int octaves = 1;
+	
 	OpenSimplexNoise[] noises;
 	
 	public NoiseGenerator(){
@@ -78,7 +84,12 @@ public class NoiseGenerator implements GenerationNode{
 	}
 
 	@Override
-	public void setInput(int index, GenerationNode node) {
+	public void setInput(int index, Node node) {
 		System.err.println("Tried to set Input for the GenerationNode NoiseGenerator which has no inputs");
+	}
+
+	@Override
+	public String getDisplayName() {
+		return "Noise";
 	}
 }

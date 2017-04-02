@@ -86,8 +86,8 @@ public class MainStage extends Stage{
 		leftTable.add(widget).row();
 //		leftTable.add(widget);
 		collapsibleTable.align(Align.top | Align.left);
-		for (int i = 0 ; i < 50 ; i++)
-			collapsibleTable.add(new VisTextButton("Button "+i)).align(Align.left).row();
+//		for (int i = 0 ; i < 50 ; i++)
+//			collapsibleTable.add(new VisTextButton("Button "+i)).align(Align.left).row();
 		collapsibleTable.add(slider);
 		collapsibleTable.add(label);
 		
