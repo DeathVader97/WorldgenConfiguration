@@ -1,0 +1,75 @@
+!!de.felixperko.worldgenconfig.PropertyEditor.EditorMisc.EditorData {
+  components: [
+    !!de.felixperko.worldgenconfig.Generation.GenPath.Components.CombineAddComponent {
+      ID: 4,
+      editorData: {
+        editorName: '#1',
+        editorX: 533.00006,
+        editorY: 249.0
+      },
+      factor1: 0.6,
+      factor2: 0.4,
+      id: 4,
+      inputComponentIDs: [
+        0,
+        2]
+      
+    },
+    !!de.felixperko.worldgenconfig.Generation.GenPath.Components.NoiseGeneratorComponent {
+      ID: 0,
+      editorData: {
+        editorName: '#1',
+        editorX: 204.0,
+        editorY: 336.0
+      },
+      frequency: 0.0025,
+      id: 0,
+      lacunarity: 2.0,
+      octaves: 8,
+      persistance: 0.6,
+      seed: 43
+    },
+    !!de.felixperko.worldgenconfig.Generation.GenPath.Components.ModifierComponent {
+      ID: 2,
+      editorData: {
+        editorName: '#1',
+        editorX: 378.00006,
+        editorY: 344.0
+      },
+      id: 2,
+      inputID: 1,
+      modifier: {
+        defaultValue: 0.0,
+        intervals: [
+          !!de.felixperko.worldgenconfig.Generation.Interpolation.LinearInterpolationInterval {
+            max: 0.0,
+            min: -1000000.0,
+            scalingFactor: -1.0,
+            shift: 0.0
+          },
+          !!de.felixperko.worldgenconfig.Generation.Interpolation.LinearInterpolationInterval {
+            max: 1000000.0,
+            min: 0.0,
+            scalingFactor: 1.0,
+            shift: 0.0
+          }]
+        
+      }
+    },
+    !!de.felixperko.worldgenconfig.Generation.GenPath.Components.NoiseGeneratorComponent {
+      ID: 1,
+      editorData: {
+        editorName: '#2',
+        editorX: 187.0,
+        editorY: 212.0
+      },
+      frequency: 0.025,
+      id: 1,
+      lacunarity: 2.0,
+      octaves: 8,
+      persistance: 0.5,
+      seed: 42
+    }]
+  ,
+  endID: 4
+}

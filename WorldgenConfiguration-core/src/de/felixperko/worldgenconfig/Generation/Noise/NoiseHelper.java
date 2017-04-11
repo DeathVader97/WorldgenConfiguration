@@ -1,7 +1,5 @@
 package de.felixperko.worldgenconfig.Generation.Noise;
 
-import java.util.HashMap;
-
 public class NoiseHelper {
 
 	public static OpenSimplexNoise openSimplexNoise = new OpenSimplexNoise();

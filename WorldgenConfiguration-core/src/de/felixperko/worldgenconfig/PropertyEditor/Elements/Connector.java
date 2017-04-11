@@ -4,22 +4,26 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Connector {
 	
-	DisplayNode node;
+	/*
+	 * A Connector serves as an interface to connect different Blocks to each other.
+	 */
+	
+	public Block block;
 	
 	public Connection connection = null;
 	Vector2 pos = new Vector2();
 	
 	boolean isOutput;
 	
-	public Connector(DisplayNode node, int x, int y, boolean isOutput) {
+	public Connector(Block block, int x, int y, boolean isOutput) {
 		this.isOutput = isOutput;
-		this.node = node;
+		this.block = block;
 		pos.x = x;
 		pos.y = y;
 	}
 
 	public Vector2 getPos() {
-		return new Vector2(node.getX()+pos.x, node.getY()+pos.y);
+		return new Vector2(block.getX()+pos.x, block.getY()+pos.y);
 	}
 
 	public boolean isOutput() {
@@ -28,6 +32,14 @@ public class Connector {
 	
 	public void setConnection(Connection c){
 		connection = c;
-		node.drawImage();
+		block.drawImage();
+	}
+	
+	public Block getConnectedBlock(){
+		if (connection == null)
+			return null;
+		if (isOutput)
+			return connection.input.block;
+		return connection.output.block;
 	}
 }

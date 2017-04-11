@@ -1,9 +1,29 @@
 package de.felixperko.worldgenconfig.Generation.Interpolation;
 
 public abstract class Interval {
-	public double min;
+	double min;
 	double max;
 	
+	public Interval(){}
+	
+	public double getMin() {
+		return min;
+	}
+
+	public void setMin(double min) {
+		this.min = min;
+		System.out.println("set min to "+min);
+	}
+
+	public double getMax() {
+		return max;
+	}
+
+	public void setMax(double max) {
+		this.max = max;
+		System.out.println("set max to "+max);
+	}
+
 	public Interval(double min, double max){
 		this.min = min;
 		this.max = max;
@@ -17,5 +37,13 @@ public abstract class Interval {
 		return 0;
 	}
 	
-	public abstract double getValue(double v);
+	public abstract double modify(double v);
+	
+	public abstract void serializeData(StringBuilder s);
+	
+	public void serialize(StringBuilder s) {
+		s.append(getClass().getSimpleName()).append(",").append(min).append(",").append(max).append(",");
+		serializeData(s);
+	}
+	
 }

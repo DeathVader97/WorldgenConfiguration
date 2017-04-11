@@ -1,16 +1,16 @@
-package de.felixperko.worldgenconfig.desktop;
+package de.felixperko.worldgenconfig.PropertyEditor.EditorMisc;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import de.felixperko.worldgenconfig.PropertyEditor.EditorMisc.EditorMain;
-
 public class EditorLauncher {
 	public static void main(String[] args) {
 	    final LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-	    config.title = "Game";
+	    config.title = "Editor";
 		config.width = 800;
-		config.height = 500; 
+		config.height = 500;
+		config.samples = 1;
 	    new LwjglApplication(new EditorMain(), config);  
 	}
+
 }

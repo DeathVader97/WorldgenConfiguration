@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 
-import de.felixperko.worldgenconfig.PropertyEditor.EditorStage;
+import de.felixperko.worldgenconfig.PropertyEditor.EditorMisc.EditorStage;
 
 public class Connection {
 	

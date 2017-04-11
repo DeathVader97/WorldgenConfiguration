@@ -7,8 +7,8 @@ import java.lang.ProcessBuilder.Redirect;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import de.felixperko.worldgenconfig.Main;
-import de.felixperko.worldgenconfig.PropertyEditor.EditorMain;
+import de.felixperko.worldgenconfig.MainMisc.Main;
+import de.felixperko.worldgenconfig.PropertyEditor.EditorMisc.EditorMain;
 
 public class DesktopLauncher {
 	
@@ -16,18 +16,18 @@ public class DesktopLauncher {
 	
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 1200;
-		config.height = 900;
+		config.width = 1000;
+		config.height = 700;
 		main = new Main();
 		new LwjglApplication(main, config);
 		
-		try {
-			exec(EditorLauncher.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			exec(EditorLauncher.class);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	public static int exec(Class klass) throws IOException, InterruptedException {
