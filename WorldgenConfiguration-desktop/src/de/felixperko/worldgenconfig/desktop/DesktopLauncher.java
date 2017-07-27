@@ -8,7 +8,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 import de.felixperko.worldgenconfig.MainMisc.Main;
-import de.felixperko.worldgenconfig.PropertyEditor.EditorMisc.EditorMain;
 
 public class DesktopLauncher {
 	
@@ -17,7 +16,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 1000;
-		config.height = 700;
+		config.height = 750;
+		config.foregroundFPS = 0;
 		main = new Main();
 		new LwjglApplication(main, config);
 		

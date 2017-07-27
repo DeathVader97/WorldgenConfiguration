@@ -1,8 +1,6 @@
 package de.felixperko.worldgenconfig.Generation.Interpolation;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class Modifier {
 	

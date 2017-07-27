@@ -1,4 +1,4 @@
-package de.felixperko.worldgenconfig.MainMisc;
+package de.felixperko.worldgenconfig.MainMisc.Utilities.Various;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

@@ -1,6 +1,10 @@
 package de.felixperko.worldgenconfig.MainMisc;
 
+import de.felixperko.worldgenconfig.GUI.Test.TestManager;
+
 public class TickThread extends Thread{
+	
+	TestManager testManager = null;
 	
 	int waitMs = 1;
 	
@@ -9,7 +13,8 @@ public class TickThread extends Thread{
 	}
 
 	private void loop() {
-		
+		if (testManager != null)
+			testManager.tick();
 	}
 	
 	@Override
@@ -27,5 +32,13 @@ public class TickThread extends Thread{
 				}
 			}
 		}
+	}
+
+	public void setTestManager(TestManager testManager) {
+		this.testManager = testManager;
+	}
+
+	public TestManager getTestManager() {
+		return testManager;
 	}
 }

@@ -23,7 +23,6 @@ public abstract class Component {
 	BlockData editorData = new BlockData();
 	
 	protected void generateID() {
-		System.out.println("generating ID: "+id_counter+" for "+getClass().getSimpleName());
 		id = id_counter;
 		id_counter++;
 	}
@@ -38,7 +37,6 @@ public abstract class Component {
 	}
 	
 	public void setID(Integer id){
-		System.out.println("manually setting id from "+getID()+" to: "+id);
 		this.id = id;
 		updateIDCounter(id);
 	}

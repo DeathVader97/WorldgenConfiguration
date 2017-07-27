@@ -60,7 +60,6 @@ public class EditorStage extends Stage {
 		this.editorMain = editorMain;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void init() {
 		VisUI.load();
 		endPoint = new EndBlock(this, (int) (Gdx.graphics.getWidth()*0.9f), Gdx.graphics.getHeight()/2);
@@ -91,19 +90,19 @@ public class EditorStage extends Stage {
 						if (block instanceof ComponentBlock)
 							components.add(((ComponentBlock)block).getComponent());
 					}
-					yaml.dump(new EditorData(stage) ,new FileWriter("testfile.yml"));
-					editorMain.communication.addOutput("updatedProperty");
+					yaml.dump(new EditorData(stage) ,new FileWriter(EditorMain.editorMain.file));
+					editorMain.com.writeMessage("updatedProperty");
 				} catch (IOException e) {
-					editorMain.communication.addOutput("error while updating Property");
+					editorMain.com.writeMessage("error while updating Property");
 					e.printStackTrace();
 				}
 			}
 		});
 		
-		File testFile = new File("testfile.yml");
-		if (testFile.exists()){
+		File file = EditorMain.editorMain.file;
+		if (file.exists()){
 			try {
-				((EditorData) yaml.load(new FileInputStream(testFile))).importToStage(stage);
+				((EditorData) yaml.load(new FileInputStream(file))).importToStage(stage);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

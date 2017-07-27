@@ -26,7 +26,7 @@ public class NoiseGeneratorComponent extends Component{
 	
 	int prevGenerationSeed = 0;
 	
-	OpenSimplexNoise[] noises;
+	ThreadLocal<OpenSimplexNoise[]> noises = new ThreadLocal<>();
 	
 	public NoiseGeneratorComponent(){
 		generateID();
@@ -38,7 +38,7 @@ public class NoiseGeneratorComponent extends Component{
 		double maxAmp = 0;
 		double frequency = this.frequency;
 		for (int o = 0 ; o < octaves ; o++){
-			value += noises[o].eval(x*frequency, y*frequency)*amplitude;
+			value += noises.get()[o].eval(x*frequency, y*frequency)*amplitude;
 			maxAmp += amplitude;
 			amplitude *= persistance;
 			frequency *= lacunarity;
@@ -87,18 +87,18 @@ public class NoiseGeneratorComponent extends Component{
 	}
 
 	public void resetOctaves() {
-		noises = new OpenSimplexNoise[octaves];
+		noises.set(new OpenSimplexNoise[octaves]);
 		Random random = new Random(seed);
 		prevGenerationSeed = seed;
-		for (int i = 0; i < noises.length; i++) {
+		for (int i = 0; i < noises.get().length; i++) {
 			long noiseseed = random.nextLong();
-			noises[i] = new OpenSimplexNoise(noiseseed);
+			noises.get()[i] = new OpenSimplexNoise(noiseseed);
 		}
 	}
 
 	@Override
 	public double getGenerationValue(GenerationParameterSupply supply) {
-		if (noises == null || noises.length != octaves || prevGenerationSeed != seed)
+		if (noises.get() == null || noises.get().length != octaves || prevGenerationSeed != seed)
 			resetOctaves();
 		return simplexNoise2D(supply.getX(), supply.getY());
 	}

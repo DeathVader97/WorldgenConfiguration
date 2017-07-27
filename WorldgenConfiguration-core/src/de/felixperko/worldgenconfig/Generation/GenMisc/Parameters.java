@@ -8,23 +8,26 @@ import de.felixperko.worldgenconfig.Generation.GenPath.Misc.GenerationPathIncomp
 
 public class Parameters {
 	
-	GenerationParameterSupply supply;
-	
-	int width;
-	int height;
-	
-	ColoringRuleset coloringRules;
+	public SelectionRuleset selectionRuleset;
 	
 	ArrayList<Constant> constants;
 	PropertyDefinition[] propertyDefinitions;
-	ArrayList<TerrainType> types;
 	
-	public double[] generateProperties(double x, double y) throws GenerationPathIncompleteException{
-		double[] data = new double[propertyDefinitions.length];
-		supply.setPos(x, y, data);
-		for (int i = 0; i < data.length; i++){
-			data[i] = propertyDefinitions[i].generateProperty(supply);
+	public int propertySize;
+	
+	public Parameters(SelectionRuleset selectionRuleset, PropertyDefinition... definitions){
+		selectionRuleset.setParameters(this);
+		this.propertyDefinitions = definitions;
+		propertySize = definitions.length;
+		this.selectionRuleset = selectionRuleset;
+	}
+	
+	public double getProperty(int propertyIndex, GenerationParameterSupply supply) throws NullPointerException{
+		try {
+			return propertyDefinitions[propertyIndex].generateProperty(supply);
+		} catch (GenerationPathIncompleteException e) {
+			e.printStackTrace();
+			return 0;
 		}
-		return data;
 	}
 }

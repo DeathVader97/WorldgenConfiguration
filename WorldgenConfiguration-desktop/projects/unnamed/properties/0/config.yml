@@ -1,0 +1,46 @@
+!!de.felixperko.worldgenconfig.PropertyEditor.EditorMisc.EditorData {
+  components: [
+    !!de.felixperko.worldgenconfig.Generation.GenPath.Components.ModifierComponent {
+      ID: 1,
+      editorData: {
+        editorName: '#1',
+        editorX: 483.0,
+        editorY: 206.0
+      },
+      id: 1,
+      inputID: 0,
+      modifier: {
+        defaultValue: 0.0,
+        intervals: [
+          !!de.felixperko.worldgenconfig.Generation.Interpolation.LinearInterpolationInterval {
+            max: 0.0,
+            min: -1000000.0,
+            scalingFactor: -1.0,
+            shift: 0.0
+          },
+          !!de.felixperko.worldgenconfig.Generation.Interpolation.LinearInterpolationInterval {
+            max: 1000000.0,
+            min: 0.0,
+            scalingFactor: 1.0,
+            shift: 0.0
+          }]
+        
+      }
+    },
+    !!de.felixperko.worldgenconfig.Generation.GenPath.Components.NoiseGeneratorComponent {
+      ID: 0,
+      editorData: {
+        editorName: '#1',
+        editorX: 269.00003,
+        editorY: 275.0
+      },
+      frequency: 0.01,
+      id: 0,
+      lacunarity: 2.0,
+      octaves: 64,
+      persistance: 0.5,
+      seed: 42
+    }]
+  ,
+  endID: 1
+}

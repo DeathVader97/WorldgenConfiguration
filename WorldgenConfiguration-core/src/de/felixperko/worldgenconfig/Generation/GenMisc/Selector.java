@@ -1,22 +1,48 @@
 package de.felixperko.worldgenconfig.Generation.GenMisc;
 
+import java.util.ArrayList;
+
 public class Selector {
 	
-	double[] definiteMin;
-	double[] definiteMax;
-	boolean[] enabled;
-	boolean[] hasCondition;
-	double[] conditionMin;
-	double[] conditionMax;
+	public Double[] definiteMin;
+	public Double[] definiteMax;
+	public Boolean[] enabled;
+	public Boolean[] hasCondition;
+	public Double[] conditionMin;
+	public Double[] conditionMax;
 	
 	public Selector() {
-		int size = TerrainFeature.count;
-		definiteMin = new double[size];
-		definiteMax = new double[size];
-		enabled = new boolean[size];
-		hasCondition = new boolean[size];
-		conditionMin = new double[size];
-		conditionMax = new double[size];
+		
+	}
+	
+	public Selector(int propertyCount){
+		definiteMin = new Double[propertyCount];
+		definiteMax = new Double[propertyCount];
+		enabled = new Boolean[propertyCount];
+		hasCondition = new Boolean[propertyCount];
+		conditionMin = new Double[propertyCount];
+		conditionMax = new Double[propertyCount];
+	}
+	
+	public Selector(int propertyCount, ArrayList<PropertySelectionBuilder> list){
+		definiteMin = new Double[propertyCount];
+		definiteMax = new Double[propertyCount];
+		enabled = new Boolean[propertyCount];
+		hasCondition = new Boolean[propertyCount];
+		conditionMin = new Double[propertyCount];
+		conditionMax = new Double[propertyCount];
+		for(PropertySelectionBuilder b : list){
+			if (b.conditionMin != null && b.conditionMax != null){
+				hasCondition[b.id] = true;
+				conditionMin[b.id] = b.conditionMin;
+				conditionMax[b.id] = b.conditionMax;
+			}
+			if (b.definiteMin != null && b.definiteMax != null){
+				enabled[b.id] = true;
+				definiteMin[b.id] = b.definiteMin;
+				definiteMax[b.id] = b.definiteMax;
+			}
+		}
 	}
 	
 	public Selector setFeature(int feature, double definiteMin, double definiteMax){
@@ -35,7 +61,7 @@ public class Selector {
 	
 	public double getDifference(double[] features){
 		double ret = 0;
-		for (int i = 0 ; i < features.length ; i++){
+		for (int i = 0 ; i < enabled.length ; i++){
 			if (hasCondition[i]){
 				double f = features[i];
 				if (f < conditionMin[i] || f > conditionMax[i])

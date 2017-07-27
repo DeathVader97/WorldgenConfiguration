@@ -1,0 +1,19 @@
+!!de.felixperko.worldgenconfig.PropertyEditor.EditorMisc.EditorData {
+  components: [
+    !!de.felixperko.worldgenconfig.Generation.GenPath.Components.NoiseGeneratorComponent {
+      ID: 0,
+      editorData: {
+        editorName: '#1',
+        editorX: 400.00003,
+        editorY: 249.0
+      },
+      frequency: 0.005,
+      id: 0,
+      lacunarity: 2.0,
+      octaves: 8,
+      persistance: 0.5,
+      seed: 42
+    }]
+  ,
+  endID: 0
+}

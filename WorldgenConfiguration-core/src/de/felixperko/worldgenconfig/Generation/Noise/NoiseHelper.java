@@ -120,12 +120,12 @@ public class NoiseHelper {
 		return higher;
 	}
 
-	public static double simplexNoise3D(double x, double y, double z, double frequency, double persistance, double lacunarity, int octaves, OpenSimplexNoise noise){
+	public static double simplexNoise3D(double x, double y, double z, double frequency, double persistance, double lacunarity, int octaves, OpenSimplexNoise[] noises){
 		double amplitude = 1;
 		double value = 0;
 		double maxAmp = 0;
 		for (int o = 0 ; o < octaves ; o++){
-			value += noise.eval(x*frequency, y*frequency, z*frequency)*amplitude;
+			value += noises[o].eval(x*frequency, y*frequency, z*frequency)*amplitude;
 			maxAmp += amplitude;
 			amplitude *= persistance;
 			frequency *= lacunarity;
@@ -133,11 +133,34 @@ public class NoiseHelper {
 		return value/maxAmp;
 	}
 
+	public static boolean simplexNoise3DSelector(double x, double y, double z, double frequency, double persistance, double lacunarity, int octaves, OpenSimplexNoise[] noises, double border, boolean lower, boolean higher){
+		double amplitude = 1;
+		double value = 0;
+		double maxAmp = 0;
+		double relV = 0;
+		for (int o = 0 ; o < octaves ; o++){
+			value += noises[o].eval(x*frequency, y*frequency, z*frequency)*amplitude;
+			maxAmp += amplitude;
+			amplitude *= persistance;
+			relV = Math.abs(value/maxAmp);
+			if (value > amplitude*persistance+amplitude){
+//				System.out.println("got result after "+(o+1)+"/"+octaves);
+				if (relV < border)
+					return lower;
+				return higher;
+			}
+			frequency *= lacunarity;
+		}
+		if (relV < border)
+			return lower;
+		return higher;
+	}
+
 	public static double simplexNoise2D(double x, double y, double frequency, double persistance, double lacunarity, int octaves) {
 		return simplexNoise2D(x, y, frequency, persistance, lacunarity, octaves, openSimplexNoise);
 	}
 
-	public static double simplexNoise3D(double x, double y, double z, double frequency, double persistance, double lacunarity, int octaves) {
-		return simplexNoise3D(x, y, z, frequency, persistance, lacunarity, octaves, openSimplexNoise);
-	}
+//	public static double simplexNoise3D(double x, double y, double z, double frequency, double persistance, double lacunarity, int octaves) {
+//		return simplexNoise3D(x, y, z, frequency, persistance, lacunarity, octaves, openSimplexNoise);
+//	}
 }

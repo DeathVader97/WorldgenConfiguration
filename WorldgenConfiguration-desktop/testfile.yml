@@ -4,37 +4,23 @@
       ID: 4,
       editorData: {
         editorName: '#1',
-        editorX: 533.00006,
-        editorY: 249.0
+        editorX: 545.0,
+        editorY: 218.0
       },
-      factor1: 0.6,
-      factor2: 0.4,
+      factor1: 0.5,
+      factor2: 0.25,
       id: 4,
       inputComponentIDs: [
-        0,
-        2]
+        2,
+        8]
       
-    },
-    !!de.felixperko.worldgenconfig.Generation.GenPath.Components.NoiseGeneratorComponent {
-      ID: 0,
-      editorData: {
-        editorName: '#1',
-        editorX: 204.0,
-        editorY: 336.0
-      },
-      frequency: 0.0025,
-      id: 0,
-      lacunarity: 2.0,
-      octaves: 8,
-      persistance: 0.6,
-      seed: 43
     },
     !!de.felixperko.worldgenconfig.Generation.GenPath.Components.ModifierComponent {
       ID: 2,
       editorData: {
         editorName: '#1',
-        editorX: 378.00006,
-        editorY: 344.0
+        editorX: 344.00003,
+        editorY: 171.0
       },
       id: 2,
       inputID: 1,
@@ -60,8 +46,8 @@
       ID: 1,
       editorData: {
         editorName: '#2',
-        editorX: 187.0,
-        editorY: 212.0
+        editorX: 160.00002,
+        editorY: 184.0
       },
       frequency: 0.025,
       id: 1,
@@ -69,6 +55,47 @@
       octaves: 8,
       persistance: 0.5,
       seed: 42
+    },
+    !!de.felixperko.worldgenconfig.Generation.GenPath.Components.ModifierComponent {
+      ID: 8,
+      editorData: {
+        editorName: '#2',
+        editorX: 339.00003,
+        editorY: 313.0
+      },
+      id: 8,
+      inputID: 0,
+      modifier: {
+        defaultValue: 0.0,
+        intervals: [
+          !!de.felixperko.worldgenconfig.Generation.Interpolation.LinearInterpolationInterval {
+            max: 0.0,
+            min: -1000000.0,
+            scalingFactor: -1.0,
+            shift: 0.0
+          },
+          !!de.felixperko.worldgenconfig.Generation.Interpolation.LinearInterpolationInterval {
+            max: 1000000.0,
+            min: 0.0,
+            scalingFactor: 1.0,
+            shift: 0.0
+          }]
+        
+      }
+    },
+    !!de.felixperko.worldgenconfig.Generation.GenPath.Components.NoiseGeneratorComponent {
+      ID: 0,
+      editorData: {
+        editorName: '#1',
+        editorX: 161.0,
+        editorY: 357.0
+      },
+      frequency: 0.0025,
+      id: 0,
+      lacunarity: 2.0,
+      octaves: 8,
+      persistance: 0.6,
+      seed: 43
     }]
   ,
   endID: 4
