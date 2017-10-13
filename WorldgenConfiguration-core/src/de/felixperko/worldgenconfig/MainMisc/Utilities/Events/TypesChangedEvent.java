@@ -2,7 +2,7 @@ package de.felixperko.worldgenconfig.MainMisc.Utilities.Events;
 
 import java.util.ArrayList;
 
-import de.felixperko.worldgenconfig.Generation.GenMisc.TerrainType;
+import de.felixperko.worldgen.Generation.Misc.TerrainType;
 import de.felixperko.worldgenconfig.MainMisc.Utilities.Events.EventSystem.WorldgenEvent;
 
 public class TypesChangedEvent extends WorldgenEvent {

@@ -78,7 +78,7 @@ public class EditorMain extends ApplicationAdapter{
 				String[] s = msg.substring(9).split(" ");
 				project = s[0];
 				property = Integer.parseInt(s[1]);
-				FileHandle path = Gdx.files.external("AppData/Roaming/MinecraftWorldgen/"+project+"/properties/");
+				FileHandle path = Gdx.files.external("AppData/Roaming/MinecraftWorldgen/"+project+"/temp/");
 				file = path.child(property+".yml").file();
 			}
 		}

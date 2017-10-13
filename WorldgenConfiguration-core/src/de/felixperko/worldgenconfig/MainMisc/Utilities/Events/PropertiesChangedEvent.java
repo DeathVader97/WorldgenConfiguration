@@ -2,7 +2,7 @@ package de.felixperko.worldgenconfig.MainMisc.Utilities.Events;
 
 import java.util.ArrayList;
 
-import de.felixperko.worldgenconfig.Generation.GenMisc.PropertyDefinition;
+import de.felixperko.worldgen.Generation.Misc.PropertyDefinition;
 import de.felixperko.worldgenconfig.MainMisc.Utilities.Events.EventSystem.WorldgenEvent;
 
 public class PropertiesChangedEvent extends WorldgenEvent {

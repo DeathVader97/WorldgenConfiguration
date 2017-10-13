@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import de.felixperko.worldgenconfig.Generation.GenPath.Components.Component;
+import de.felixperko.worldgen.Generation.Components.Component;
 import de.felixperko.worldgenconfig.PropertyEditor.EditorMisc.EditorStage;
 
 public class EndBlock extends Block {

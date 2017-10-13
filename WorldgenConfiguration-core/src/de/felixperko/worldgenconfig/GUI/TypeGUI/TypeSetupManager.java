@@ -2,8 +2,8 @@ package de.felixperko.worldgenconfig.GUI.TypeGUI;
 
 import com.kotcrab.vis.ui.widget.VisTable;
 
+import de.felixperko.worldgen.Generation.Misc.TerrainType;
 import de.felixperko.worldgenconfig.GUI.Util.GuiList;
-import de.felixperko.worldgenconfig.Generation.GenMisc.TerrainType;
 import de.felixperko.worldgenconfig.MainMisc.Main;
 import de.felixperko.worldgenconfig.MainMisc.MainStage;
 

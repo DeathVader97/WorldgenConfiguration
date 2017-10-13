@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-import de.felixperko.worldgenconfig.Generation.GenMisc.Parameters;
+import de.felixperko.worldgen.Generation.Misc.Parameters;
 
 public class GenerationManager {
 	

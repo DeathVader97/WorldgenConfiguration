@@ -8,11 +8,11 @@ import com.kotcrab.vis.ui.util.InputValidator;
 import com.kotcrab.vis.ui.widget.VisCheckBox;
 import com.kotcrab.vis.ui.widget.VisValidatableTextField;
 
+import de.felixperko.worldgen.Generation.Misc.PropertyDefinition;
 import de.felixperko.worldgenconfig.GUI.Util.CustomSelectionOption;
 import de.felixperko.worldgenconfig.GUI.Util.GuiList;
 import de.felixperko.worldgenconfig.GUI.Util.GuiListElement;
 import de.felixperko.worldgenconfig.GUI.Util.PropertySelectBox;
-import de.felixperko.worldgenconfig.Generation.GenMisc.PropertyDefinition;
 
 public class Statement extends GuiListElement {
 	

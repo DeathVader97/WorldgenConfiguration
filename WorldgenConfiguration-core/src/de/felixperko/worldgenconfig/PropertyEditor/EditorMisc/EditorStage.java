@@ -24,11 +24,11 @@ import com.kotcrab.vis.ui.widget.PopupMenu;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 
-import de.felixperko.worldgenconfig.Generation.GenPath.Components.CombineAddComponent;
-import de.felixperko.worldgenconfig.Generation.GenPath.Components.Component;
-import de.felixperko.worldgenconfig.Generation.GenPath.Components.ModifierComponent;
-import de.felixperko.worldgenconfig.Generation.GenPath.Components.NoiseGeneratorComponent;
-import de.felixperko.worldgenconfig.Generation.GenPath.Misc.GenerationParameterSupply;
+import de.felixperko.worldgen.Generation.Components.CombineAddComponent;
+import de.felixperko.worldgen.Generation.Components.Component;
+import de.felixperko.worldgen.Generation.Components.ModifierComponent;
+import de.felixperko.worldgen.Generation.Components.NoiseGeneratorComponent;
+import de.felixperko.worldgen.Generation.Misc.GenerationParameterSupply;
 import de.felixperko.worldgenconfig.PropertyEditor.Elements.Block;
 import de.felixperko.worldgenconfig.PropertyEditor.Elements.ComponentBlock;
 import de.felixperko.worldgenconfig.PropertyEditor.Elements.Connection;

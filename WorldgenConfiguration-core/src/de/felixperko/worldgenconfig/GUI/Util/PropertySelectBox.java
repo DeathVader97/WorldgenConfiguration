@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Disposable;
 
-import de.felixperko.worldgenconfig.Generation.GenMisc.PropertyDefinition;
+import de.felixperko.worldgen.Generation.Misc.PropertyDefinition;
 import de.felixperko.worldgenconfig.Generation.GenMisc.WorldConfiguration;
 import de.felixperko.worldgenconfig.MainMisc.Main;
 import de.felixperko.worldgenconfig.MainMisc.Utilities.Events.PropertiesChangedEvent;
@@ -50,7 +50,7 @@ public class PropertySelectBox extends WorldgenSelectBox implements WorldgenEven
 		});
 	}
 	
-	private void selectionChanged() {
+	public void selectionChanged() {
 		PropertyWrapper wrapper = null;
 		if (getSelected() instanceof PropertyWrapper)
 			wrapper = (PropertyWrapper)getSelected();

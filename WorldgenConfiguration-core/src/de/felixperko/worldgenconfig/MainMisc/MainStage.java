@@ -1,5 +1,6 @@
 package de.felixperko.worldgenconfig.MainMisc;
 
+import java.io.FileFilter;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -13,8 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.kotcrab.vis.runtime.spriter.File;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.InputValidator;
 import com.kotcrab.vis.ui.widget.CollapsibleWidget;
@@ -33,6 +36,9 @@ import com.kotcrab.vis.ui.widget.VisValidatableTextField;
 import com.kotcrab.vis.ui.widget.color.ColorPicker;
 import com.kotcrab.vis.ui.widget.color.ColorPickerAdapter;
 
+import de.felixperko.worldgen.Generation.Misc.Parameters;
+import de.felixperko.worldgen.Generation.Misc.Selector;
+import de.felixperko.worldgen.Generation.Misc.TerrainType;
 import de.felixperko.worldgenconfig.GUI.DisplaySettingsManager;
 import de.felixperko.worldgenconfig.GUI.MenuGUI.MenuActions;
 import de.felixperko.worldgenconfig.GUI.PropertyGUI.ChangedPropertiesEvent;
@@ -40,9 +46,6 @@ import de.felixperko.worldgenconfig.GUI.PropertyGUI.InvalidPropertyException;
 import de.felixperko.worldgenconfig.GUI.PropertyGUI.PropertySetupManager;
 import de.felixperko.worldgenconfig.GUI.TypeGUI.TypeSetupManager;
 import de.felixperko.worldgenconfig.GUI.Util.PropertySelectBox;
-import de.felixperko.worldgenconfig.Generation.GenMisc.Parameters;
-import de.felixperko.worldgenconfig.Generation.GenMisc.Selector;
-import de.felixperko.worldgenconfig.Generation.GenMisc.TerrainType;
 import de.felixperko.worldgenconfig.Generation.ImageGeneration.ImageManager;
 import de.felixperko.worldgenconfig.Generation.ImageGeneration.WorldgenImage;
 
@@ -79,26 +82,24 @@ public class MainStage extends Stage{
 	MainStage thisStage = this;
 	ArrayList<TerrainType> types = new ArrayList<>();
 	
-	{
-		types.add(new TerrainType("", new Selector(2).setCondition(0, 0.0, 0.25), null, new java.awt.Color(0f,0f,1f)));
-		types.add(new TerrainType("", new Selector(2).setCondition(0, 0.25, 1.0).setFeature(1, -1, 0), null, new java.awt.Color(0f,1f,0f)));
-		types.add(new TerrainType("", new Selector(2).setCondition(0, 0.25, 1.0).setFeature(1, 0, 1), null, new java.awt.Color(1f,0f,0f)));
-		
-		slider.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				label.setText(slider.getValue()+"");
-			}
-		});
-	}
+//	{
+//		types.add(new TerrainType("", new Selector(2).setCondition(0, 0.0, 0.25), null, new java.awt.Color(0f,0f,1f)));
+//		types.add(new TerrainType("", new Selector(2).setCondition(0, 0.25, 1.0).setFeature(1, -1, 0), null, new java.awt.Color(0f,1f,0f)));
+//		types.add(new TerrainType("", new Selector(2).setCondition(0, 0.25, 1.0).setFeature(1, 0, 1), null, new java.awt.Color(1f,0f,0f)));
+//		
+//		slider.addListener(new ChangeListener() {
+//			@Override
+//			public void changed(ChangeEvent event, Actor actor) {
+//				label.setText(slider.getValue()+"");
+//			}
+//		});
+//	}
 	static int propertyCounter = 1;
 	
 	public void init(){
-//		batch = new SpriteBatch();
 		Gdx.input.setInputProcessor(this);
 		
 		mainTable = new VisTable(true);
-//		mainTable.pad
 		rightTable = new VisTable(true);
 		
 		addActor(mainTable);
@@ -136,12 +137,10 @@ public class MainStage extends Stage{
 			public void menuOpened(Menu menu) {
 				openSubMenu.clearChildren();
 				exportSubMenu.clearChildren();
-				boolean addedSomething = false;
 				for (FileHandle fileHandle : Main.main.workDirectory.list()){
 					String name = fileHandle.name();
 					if (!name.equals(Main.main.currentProject)){
 						openSubMenu.addItem(new MenuItem(name));
-						addedSomething = true;
 					}
 					exportSubMenu.addItem(new MenuItem(name));
 				}
@@ -168,8 +167,9 @@ public class MainStage extends Stage{
 
 	private void setupProperties() {
 		mainTable.add(imageManager).expand().fill();
-		mainTable.add(scrollPane).expandY().prefHeight(Gdx.graphics.getHeight()).prefWidth(300);
-		scrollPane.setFillParent(true);
+		scrollPane.debug();
+		mainTable.add(scrollPane).prefHeight(Gdx.graphics.getHeight()).prefWidth(300);
+//		scrollPane.setFillParent(true);
 		
 		final VisTable propertiesTable = new VisTable(true);
 		final CollapsibleWidget propertiesWidget = new CollapsibleWidget(propertiesTable);

@@ -18,11 +18,12 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.github.czyzby.kiwi.util.tuple.immutable.Pair;
 import com.kotcrab.vis.ui.VisUI;
 
+import de.felixperko.worldgen.WorldgenAPI;
+import de.felixperko.worldgen.Generation.Misc.PropertyDefinition;
+import de.felixperko.worldgen.Generation.Misc.TerrainType;
 import de.felixperko.worldgenconfig.Communication.NonBlockingServer;
 import de.felixperko.worldgenconfig.GUI.PropertyGUI.InvalidPropertyException;
 import de.felixperko.worldgenconfig.GUI.PropertyGUI.PropertyBuilder;
-import de.felixperko.worldgenconfig.Generation.GenMisc.PropertyDefinition;
-import de.felixperko.worldgenconfig.Generation.GenMisc.TerrainType;
 import de.felixperko.worldgenconfig.Generation.GenMisc.WorldConfiguration;
 import de.felixperko.worldgenconfig.MainMisc.Utilities.Events.PropertiesChangedEvent;
 import de.felixperko.worldgenconfig.MainMisc.Utilities.Events.TypesChangedEvent;
@@ -48,20 +49,34 @@ public class Main extends ApplicationAdapter {
 	public WorldConfiguration currentWorldConfig;
 	public EventManager eventManager = new EventManager();
 	
+	public WorldgenAPI worldgenAPI = new WorldgenAPI();
 	public Yaml yaml;
 	
 	@Override
 	public void create () {
 		main = this;
+		
 		configureYaml();
+		
 		setupIO();
+		
 		com = new NonBlockingServer();
 		com.start();
+		
 		tickThread.start();
+		
 		VisUI.load();
+		
 		stage = new MainStage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), new SpriteBatch());
 		stage.init();
+		
 		Gdx.input.setInputProcessor(new InputMultiplexer(stage, new Input(new InputGestureListener())));
+		
+		try {
+			stage.displaySettingsManager.applyCombined();
+		} catch (InvalidPropertyException e) {
+			configBuildFailure(e);
+		}
 	}
 
 	private void setupIO() {
@@ -152,6 +167,22 @@ public class Main extends ApplicationAdapter {
 			System.out.println("couldn't load config, generating new...");
 			currentWorldConfig = new WorldConfiguration();
 		}
+		currentWorldConfig.setAutosave(false);
+		for (FileHandle f : projectDirectory.child("properties").list()){
+			try {
+				currentWorldConfig.addProperty((PropertyDefinition) Main.main.yaml.load(new FileInputStream(f.file())));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		for (FileHandle f : projectDirectory.child("types").list()){
+			try {
+				currentWorldConfig.addType((TerrainType) Main.main.yaml.load(new FileInputStream(f.file())));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		currentWorldConfig.setAutosave(true);
 		if (!first){
 			eventManager.fireEvent(new PropertiesChangedEvent(previousProperties, currentWorldConfig.properties));
 			eventManager.fireEvent(new TypesChangedEvent(previousTypes, currentWorldConfig.types));

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 
-import de.felixperko.worldgenconfig.Generation.GenMisc.Parameters;
+import de.felixperko.worldgen.Generation.Misc.Parameters;
 
 public class JobThread extends Thread{
 	
@@ -96,7 +96,7 @@ public class JobThread extends Thread{
 			}
 			job.finish(pm);
 		} catch (NullPointerException e) {
-			System.err.println("NPE at job");
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

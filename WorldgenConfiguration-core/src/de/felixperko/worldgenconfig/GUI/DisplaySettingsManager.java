@@ -8,14 +8,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
+import de.felixperko.worldgen.Generation.Misc.Parameters;
+import de.felixperko.worldgen.Generation.Misc.PropertyDefinition;
+import de.felixperko.worldgen.Generation.Misc.SelectionRuleset;
+import de.felixperko.worldgen.Generation.Misc.TerrainType;
 import de.felixperko.worldgenconfig.GUI.PropertyGUI.FailureReason;
 import de.felixperko.worldgenconfig.GUI.PropertyGUI.InvalidPropertyException;
 import de.felixperko.worldgenconfig.GUI.Util.CustomSelectionOption;
 import de.felixperko.worldgenconfig.GUI.Util.PropertySelectBox;
-import de.felixperko.worldgenconfig.Generation.GenMisc.Parameters;
-import de.felixperko.worldgenconfig.Generation.GenMisc.PropertyDefinition;
-import de.felixperko.worldgenconfig.Generation.GenMisc.SelectionRuleset;
-import de.felixperko.worldgenconfig.Generation.GenMisc.TerrainType;
 import de.felixperko.worldgenconfig.MainMisc.Main;
 import de.felixperko.worldgenconfig.MainMisc.MainStage;
 
@@ -99,7 +99,8 @@ public class DisplaySettingsManager {
 		for (PropertyDefinition def : properties)
 			if (def.getLastComponent() == null)
 				throw new InvalidPropertyException(FailureReason.BAD_CONFIG);
-		Parameters params = new Parameters(ruleset, properties.toArray(new PropertyDefinition[properties.size()]));
+		ArrayList<TerrainType> types = Main.main.currentWorldConfig.getTypes();
+		Parameters params = new Parameters(ruleset, properties.toArray(new PropertyDefinition[properties.size()]), types.toArray(new TerrainType[types.size()]));
 		stage.setParameters(params, false);
 	}
 	

@@ -1,11 +1,15 @@
 package de.felixperko.worldgenconfig.Generation.GenMisc;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.yaml.snakeyaml.Yaml;
 
 import com.badlogic.gdx.files.FileHandle;
 
+import de.felixperko.worldgen.Generation.Misc.PropertyDefinition;
+import de.felixperko.worldgen.Generation.Misc.TerrainType;
 import de.felixperko.worldgenconfig.GUI.PropertyGUI.InvalidPropertyException;
 import de.felixperko.worldgenconfig.MainMisc.Main;
 import de.felixperko.worldgenconfig.MainMisc.Utilities.Events.PropertiesChangedEvent;
@@ -16,6 +20,8 @@ import de.felixperko.worldgenconfig.MainMisc.Utilities.Events.TypesChangedEvent;
  */
 
 public class WorldConfiguration {
+	
+	boolean autosave = true;
 	
 	public ArrayList<PropertyDefinition> properties = new ArrayList<>();
 	
@@ -73,12 +79,30 @@ public class WorldConfiguration {
 		ArrayList<PropertyDefinition> oldProperties = new ArrayList<>(properties);
 		properties.add(property);
 		Main.main.eventManager.fireEvent(new PropertiesChangedEvent(oldProperties, properties));
+		if (autosave)
+			saveProperties();
 	}
 
 	public void setProperties(ArrayList<PropertyDefinition> properties) {
 		ArrayList<PropertyDefinition> oldProperties = new ArrayList<>(properties);
 		this.properties = properties;
 		Main.main.eventManager.fireEvent(new PropertiesChangedEvent(oldProperties, properties));
+		if (autosave)
+			saveProperties();
+	}
+
+	private void saveProperties() {
+		FileHandle propertyFolder = Main.main.projectDirectory.child("properties");
+		propertyFolder.mkdirs();
+		for (FileHandle child : propertyFolder.list())
+			child.deleteDirectory();
+		for (PropertyDefinition def : properties){
+			try {
+				Main.main.yaml.dump(def, new FileWriter(propertyFolder.child(def.id+".yml").file()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public ArrayList<TerrainType> getTypes() {
@@ -89,6 +113,8 @@ public class WorldConfiguration {
 		ArrayList<TerrainType> oldTypes = new ArrayList<>(types);
 		types.add(type);
 		Main.main.eventManager.fireEvent(new TypesChangedEvent(oldTypes, types));
+		if (autosave)
+			saveTypes();
 	}
 
 	public void setTypes(ArrayList<TerrainType> types) {
@@ -100,6 +126,26 @@ public class WorldConfiguration {
 		} catch (InvalidPropertyException e) {
 			Main.main.configBuildFailure(e);
 		}
+		if (autosave)
+			saveTypes();
+	}
+
+	private void saveTypes() {
+		FileHandle typeFolder = Main.main.projectDirectory.child("types");
+		typeFolder.mkdirs();
+		for (FileHandle child : typeFolder.list())
+			child.deleteDirectory();
+		for (TerrainType type : types){
+			try {
+				Main.main.yaml.dump(type, new FileWriter(typeFolder.child(type.id+".yml").file()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void setAutosave(boolean autosave) {
+		this.autosave = autosave;
 	}
 }
 

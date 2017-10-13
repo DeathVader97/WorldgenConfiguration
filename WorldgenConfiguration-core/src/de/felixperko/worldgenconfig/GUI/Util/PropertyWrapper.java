@@ -1,6 +1,6 @@
 package de.felixperko.worldgenconfig.GUI.Util;
 
-import de.felixperko.worldgenconfig.Generation.GenMisc.PropertyDefinition;
+import de.felixperko.worldgen.Generation.Misc.PropertyDefinition;
 
 public class PropertyWrapper extends SelectWrapper{
 	

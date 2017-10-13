@@ -17,10 +17,10 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisTextField;
 
-import de.felixperko.worldgenconfig.Generation.GenMisc.Parameters;
-import de.felixperko.worldgenconfig.Generation.GenMisc.PropertyDefinition;
-import de.felixperko.worldgenconfig.Generation.GenMisc.SelectionRuleset;
-import de.felixperko.worldgenconfig.Generation.GenPath.Components.Component;
+import de.felixperko.worldgen.Generation.Components.Component;
+import de.felixperko.worldgen.Generation.Misc.Parameters;
+import de.felixperko.worldgen.Generation.Misc.PropertyDefinition;
+import de.felixperko.worldgen.Generation.Misc.SelectionRuleset;
 import de.felixperko.worldgenconfig.MainMisc.Main;
 import de.felixperko.worldgenconfig.MainMisc.MainStage;
 import de.felixperko.worldgenconfig.PropertyEditor.EditorMisc.EditorData;
@@ -65,10 +65,7 @@ public class PropertyBuilder {
 		this.id = id;
 		this.pos = manager.propertyBuilders.size();
 		this.table = new VisTable();
-//		FileHandle path = Gdx.files.local("projects" + File.separator + Main.main.currentProject + File.separator + "properties"
-//				+ File.separator + id + File.separator);
-//		file = path.child("config.yml").file();
-		FileHandle path = Main.main.projectDirectory.child("properties");
+		FileHandle path = Main.main.projectDirectory.child("temp");
 		path.mkdirs();
 		file = path.child(id+".yml").file();
 		
@@ -178,6 +175,8 @@ public class PropertyBuilder {
 			manager.pushProperties();
 		} catch (FileNotFoundException e){
 			throw new InvalidPropertyException(FailureReason.FILE_NOT_FOUND);
+		} catch (Exception e){
+			e.printStackTrace();
 		}
 	}
 	
@@ -197,7 +196,7 @@ public class PropertyBuilder {
 //				return new Color(v,v,v,1f).toIntBits();
 			}
 		};
-		Parameters params = new Parameters(ruleset, new PropertyDefinition(id, nameLabel.getText().toString(), endComponent));
+		Parameters params = new Parameters(ruleset, new PropertyDefinition[]{new PropertyDefinition(id, nameLabel.getText().toString(), endComponent)}, null);
 		manager.stage.setParameters(params, true);
 		return endComponent != null;
 	}

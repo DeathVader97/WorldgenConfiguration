@@ -20,8 +20,8 @@ import com.kotcrab.vis.ui.widget.VisWindow;
 import com.kotcrab.vis.ui.widget.color.ColorPicker;
 import com.kotcrab.vis.ui.widget.color.ColorPickerAdapter;
 
+import de.felixperko.worldgen.Generation.Misc.TerrainType;
 import de.felixperko.worldgenconfig.GUI.Util.GuiListElement;
-import de.felixperko.worldgenconfig.Generation.GenMisc.TerrainType;
 import de.felixperko.worldgenconfig.MainMisc.Main;
 
 public class TypeConfigurationWindow extends VisWindow {

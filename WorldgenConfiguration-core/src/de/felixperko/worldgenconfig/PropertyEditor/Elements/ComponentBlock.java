@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.VisLabel;
 
-import de.felixperko.worldgenconfig.Generation.GenPath.Components.Component;
+import de.felixperko.worldgen.Generation.Components.Component;
 import de.felixperko.worldgenconfig.Generation.GenPath.Misc.BlockData;
 import de.felixperko.worldgenconfig.PropertyEditor.EditorMisc.EditorStage;
 
@@ -168,7 +168,7 @@ public class ComponentBlock extends Block {
 	}
 
 	public Component getComponent() {
-		BlockData data = component.getEditorData();
+		BlockData data = new BlockData(component);
 		data.setEditorName(text);
 		data.setEditorX(getX());
 		data.setEditorY(getY());

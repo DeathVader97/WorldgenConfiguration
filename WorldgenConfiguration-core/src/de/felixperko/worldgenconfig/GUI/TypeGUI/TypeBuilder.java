@@ -13,10 +13,11 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.color.ColorPicker;
 
+import de.felixperko.worldgen.Generation.Misc.ColorWrapper;
+import de.felixperko.worldgen.Generation.Misc.Selector;
+import de.felixperko.worldgen.Generation.Misc.TerrainType;
 import de.felixperko.worldgenconfig.GUI.Util.GuiList;
 import de.felixperko.worldgenconfig.GUI.Util.GuiListElement;
-import de.felixperko.worldgenconfig.Generation.GenMisc.Selector;
-import de.felixperko.worldgenconfig.Generation.GenMisc.TerrainType;
 import de.felixperko.worldgenconfig.MainMisc.Main;
 
 public class TypeBuilder extends GuiListElement{
@@ -40,6 +41,8 @@ public class TypeBuilder extends GuiListElement{
 	Color color = new Color((float)Math.random(), (float)Math.random(), (float)Math.random(), 1f);
 	
 	static int ID_COUNTER;
+	
+	TerrainType type = null;
 	
 	public TypeBuilder(GuiList manager){
 		
@@ -70,7 +73,9 @@ public class TypeBuilder extends GuiListElement{
 				featureBuilders.add(new TypeStatementBuilder(i, sel.definiteMin[i], sel.definiteMax[i]));
 			}
 		}
-		
+		ColorWrapper cw = type.getColor();
+		this.color = new Color(cw.rgb[0], cw.rgb[1], cw.rgb[2], 1);
+		this.type = type;
 		init();
 	}
 	
@@ -117,7 +122,14 @@ public class TypeBuilder extends GuiListElement{
 		Selector sel = new Selector(Main.main.currentWorldConfig.getProperties().size());
 		conditionBuilders.forEach(b -> sel.setCondition(b.condition, b.low, b.high));
 		featureBuilders.forEach(b -> sel.setFeature(b.condition, b.low, b.high));
-		return new TerrainType(name, sel, null, new java.awt.Color((int)(color.r*255),(int)(color.g*255),(int)(color.b*255)));
+		if (type == null){
+			type = new TerrainType(name, sel, null, new java.awt.Color((int)(color.r*255),(int)(color.g*255),(int)(color.b*255)));
+		} else {
+			type.setSelector(sel);
+			type.setName(name);
+			type.color.set(new java.awt.Color((int)(color.r*255),(int)(color.g*255),(int)(color.b*255)));
+		}
+		return type;
 	}
 
 	public void setColor(Color color) {

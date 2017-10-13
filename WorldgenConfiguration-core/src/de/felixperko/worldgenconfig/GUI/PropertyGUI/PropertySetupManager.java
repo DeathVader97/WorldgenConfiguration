@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.layout.HorizontalFlowGroup;
 import com.kotcrab.vis.ui.widget.VisTable;
 
-import de.felixperko.worldgenconfig.Generation.GenMisc.PropertyDefinition;
+import de.felixperko.worldgen.Generation.Misc.PropertyDefinition;
 import de.felixperko.worldgenconfig.Generation.GenMisc.WorldConfiguration;
 import de.felixperko.worldgenconfig.MainMisc.Main;
 import de.felixperko.worldgenconfig.MainMisc.MainStage;
